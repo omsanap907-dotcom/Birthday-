@@ -39,7 +39,8 @@ footer{text-align:center;padding:30px 20px 40px;color:#ae8ea9;font-size:11px}foo
 .joke-reveal strong{display:block;color:#b45d8c;margin-bottom:4px}
 @keyframes riseBalloon{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-360px) rotate(8deg)}}
 @media(max-width:700px){.balloon-game{padding:17px}.game-arena{height:245px}.game-top{align-items:flex-start}}
-\n</style>
+
+</style>
 </head>
 <body>
 <div class="blob one"></div><div class="blob two"></div><div class="blob three"></div>
@@ -85,7 +86,8 @@ footer{text-align:center;padding:30px 20px 40px;color:#ae8ea9;font-size:11px}foo
     <div class="joke-reveal" id="jokeReveal" aria-live="polite"><div><strong>😂 Joke time!</strong>Tap “Reveal a birthday joke” for a tiny giggle.</div></div>
   </div>
 </section>
-\n<section class="final-card">
+
+<section class="final-card">
 <div style="font-size:34px;margin-bottom:10px">🎂 🎈 🎉</div>
 <h2>Make a wish, Krati!</h2>
 <p>May this year bring you more confidence, good surprises, beautiful memories and lots of moments where you think, “I'm really glad that happened.”</p>
@@ -133,7 +135,8 @@ footer{text-align:center;padding:30px 20px 40px;color:#ae8ea9;font-size:11px}foo
  function spawnGameBalloon(){if(!gameRunning)return;const b=document.createElement('button');b.className='game-balloon';b.type='button';b.setAttribute('aria-label','Pop balloon for one point');const colors=['#ff8bb0','#ffd166','#a999ff','#8edce5','#ff9f68','#b9e769'];const color=colors[Math.floor(Math.random()*colors.length)];b.style.background=color;b.style.color=color;b.style.left=Math.max(2,Math.random()*88)+'%';b.style.setProperty('--rise',(3.3+Math.random()*1.8)+'s');b.style.transform='scale('+(0.78+Math.random()*.45)+')';b.addEventListener('click',()=>{if(!gameRunning||b.classList.contains('popped'))return;gameScore++;scoreEl.textContent=gameScore;const r=b.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,18);b.classList.add('popped');setTimeout(()=>b.remove(),200);if(gameScore%3===0)showJoke();playChime()});arena.appendChild(b);setTimeout(()=>b.remove(),5400)}
  function endGame(){gameRunning=false;clearInterval(spawnTimer);clearInterval(countTimer);arena.querySelectorAll('.game-balloon').forEach(b=>b.remove());intro.style.display='grid';intro.innerHTML='<div>🎉 Time’s up!<br><b>You popped '+gameScore+' balloon'+(gameScore===1?'':'s')+'!</b><br>'+ (gameScore>=10?'Balloon-popping superstar! 🏆':'Want to beat your score? Give it another go!')+'</div>';startBtn.textContent='Play again 🔁';if(gameScore>best){best=gameScore;bestEl.textContent=best;try{localStorage.setItem('kratiBalloonBest',String(best))}catch(e){}}burst(innerWidth/2,innerHeight*.45,Math.min(120,35+gameScore*4));}
  startBtn.addEventListener('click',()=>{if(gameRunning)return;clearInterval(spawnTimer);clearInterval(countTimer);gameRunning=true;gameScore=0;gameTime=20;scoreEl.textContent='0';timeEl.textContent='20';intro.style.display='none';startBtn.textContent='Playing… 🎈';spawnGameBalloon();spawnTimer=setInterval(spawnGameBalloon,530);countTimer=setInterval(()=>{gameTime--;timeEl.textContent=gameTime;if(gameTime<=0)endGame()},1000)});
-\n document.getElementById('finalBtn').addEventListener('click',()=>{celebrate();document.getElementById('finalBtn').textContent='🎉 Birthday magic delivered!';setTimeout(()=>document.getElementById('finalBtn').textContent='One last burst of confetti ✨',2600)});
+
+ document.getElementById('finalBtn').addEventListener('click',()=>{celebrate();document.getElementById('finalBtn').textContent='🎉 Birthday magic delivered!';setTimeout(()=>document.getElementById('finalBtn').textContent='One last burst of confetti ✨',2600)});
  let audioCtx;function playChime(){try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();const now=audioCtx.currentTime;[523.25,659.25,783.99].forEach((freq,i)=>{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.value=freq;g.gain.setValueAtTime(.0001,now+i*.09);g.gain.exponentialRampToValueAtTime(.08,now+i*.09+.025);g.gain.exponentialRampToValueAtTime(.0001,now+i*.09+.25);o.connect(g);g.connect(audioCtx.destination);o.start(now+i*.09);o.stop(now+i*.09+.27)})}catch(e){}}
 })();
 </script>
