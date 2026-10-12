@@ -1,20 +1,21 @@
-# Krati — A Day Written in the Stars
+# Happy Birthday, Krati! 🎂
 
-A mobile-first, single-page birthday experience for October 18, built with plain HTML, CSS, and JavaScript.
+A cheerful, mobile-friendly interactive birthday website built with plain HTML, CSS, and JavaScript.
 
-## Features
-- Animated starfield and atmospheric moon illustration
-- Custom decorative constellation (clearly marked as artistic, not an official constellation)
-- Enter a birth year to calculate an **approximate** Moon phase and illumination
-- Birthday countdown to the next October 18
-- Responsive design and reduced-motion support
-- No build step, API key, or backend required
+## Interactions
+- Celebration button launches colourful confetti
+- Tap the cake to blow out or relight the candle
+- Tap balloons to pop them with a confetti burst
+- Open the gift for a birthday message
+- Tap the stars to generate different birthday wishes
+- Extra confetti burst at the end
+- Tiny synthesized chime effects (no audio files or autoplay)
 
 ## Run locally
-Open `index.html` in a browser.
+Open `index.html` in any modern browser. No install, API key, backend, or build step is needed.
 
 ## Deploy
-This is a static site. Import the repository into Netlify or Vercel, or upload the project folder to Netlify Drop. No build command is needed; the publish directory is the repository root.
+The repository includes a GitHub Pages workflow at `.github/workflows/pages.yml`. In GitHub, open **Settings → Pages** and choose **GitHub Actions** as the build and deployment source. After the workflow completes, the public page URL will appear in that section.
 
-## Accuracy note
-The lunar phase is estimated using a mean synodic month and a reference new-moon timestamp. It is not a precision ephemeris. The star pattern is original decorative artwork, not the real sky for a particular date. Exact historical positions of the Moon, planets, and constellations require a verified astronomical ephemeris and a precise time/location. The birth year is intentionally not assumed.
+## Notes
+Designed to work on phones and desktops. Respects reduced-motion preferences.
