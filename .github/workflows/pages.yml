@@ -1,4 +1,4 @@
-name: Deploy birthday site to GitHub Pages
+name: Test and deploy birthday site to GitHub Pages
 
 on:
   push:
@@ -15,8 +15,24 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Run repository smoke tests
+        run: npm test
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,13 +42,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Publish website
         id: deployment
         uses: actions/deploy-pages@v4
