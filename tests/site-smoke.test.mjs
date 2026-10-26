@@ -35,6 +35,16 @@ test('top-down spaceship game has controls, scoring, difficulty and valid JavaSc
   assert.equal(scripts.length, 1, 'Spaceship game should have one inline application script');
   for (const script of scripts) assert.doesNotThrow(() => new vm.Script(script), 'Spaceship game inline JavaScript should parse');
 });
+test('Arena Ops shooter has mobile controls, bots, combat, grenades and valid JavaScript', async () => {
+  const html = await read('../arena-shooter.html');
+  for (const marker of ['Vasundhara Ops', 'id="arena"', 'id="startBtn"', 'id="pauseBtn"', 'data-hold="left"', 'data-hold="fire"', 'data-action="grenade"', 'function spawnBot', 'function throwGrenade', 'function finish', 'requestAnimationFrame(frame)', 'Back to the birthday surprise']) {
+    assert.ok(html.includes(marker), `Missing arena shooter feature: ${marker}`);
+  }
+  assert.match(html, /<meta name="viewport"/i);
+  const scripts = inlineScripts(html);
+  assert.equal(scripts.length, 1, 'Arena shooter should have one inline application script');
+  for (const script of scripts) assert.doesNotThrow(() => new vm.Script(script), 'Arena shooter inline JavaScript should parse');
+});
 test('Neon Maze has touch, fullscreen, collecting and time-based speed features', async () => {
   const html = await read('../maze-game.html');
   for (const marker of ['Vasundhara', 'id="maze"', 'id="fullscreen"', 'data-dir="up"', 'pointerdown', 'pointerup', 'function makeGrid', 'function move(dir)', 'elapsed*.0028', 'localStorage.setItem', 'Collect every star']) {
