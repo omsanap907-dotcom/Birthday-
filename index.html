@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#fff4f7">
-<meta name="description" content="An interactive birthday surprise for Krati with wishes, confetti, balloons and a playable monkey game.">
-<title>Happy Birthday, Krati! 🎂</title>
+<meta name="description" content="An interactive birthday surprise for Vasundhara with wishes, confetti, balloons and a playable monkey game.">
+<title>Happy Birthday, Vasundhara! 🎂</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
 <style>
@@ -49,7 +49,7 @@ footer{text-align:center;padding:30px 20px 40px;color:#ae8ea9;font-size:11px}foo
 <main>
 <section class="hero" id="home">
 <div class="eyebrow">🎈 Today's all about celebrating you 🎈</div>
-<h1>Happy Birthday <span class="script">Krati! ✨</span></h1>
+<h1>Happy Birthday <span class="script">Vasundhara! ✨</span></h1>
 <p>A little page full of colour, smiles, tiny surprises and good wishes. Hope your new year brings wonderful moments, unexpected adventures and plenty of reasons to laugh.</p>
 <div class="hero-actions"><button class="primary" id="surpriseBtn">🎉 Start the celebration</button><button class="secondary" id="scrollBtn">Explore your surprises ↓</button><a class="secondary" href="./monkey-game.html" style="display:inline-block;text-decoration:none;font-weight:700">🐒 Play Monkey Run</a></div>
 <div class="stage">
@@ -94,7 +94,7 @@ footer{text-align:center;padding:30px 20px 40px;color:#ae8ea9;font-size:11px}foo
 
 <section class="final-card">
 <div style="font-size:34px;margin-bottom:10px">🎂 🎈 🎉</div>
-<h2>Make a wish, Krati!</h2>
+<h2>Make a wish, Vasundhara!</h2>
 <p>May this year bring you more confidence, good surprises, beautiful memories and lots of moments where you think, “I'm really glad that happened.”</p>
 <button id="finalBtn">One last burst of confetti ✨</button>
 </section>
@@ -133,12 +133,12 @@ footer{text-align:center;padding:30px 20px 40px;color:#ae8ea9;font-size:11px}foo
   ['What did the cake say to the fork?','“You want a piece of me?” 🍰']
  ];
  let gameRunning=false,gameScore=0,gameTime=20,spawnTimer=null,countTimer=null;
- let best=0;try{best=Number(localStorage.getItem('kratiBalloonBest')||0)}catch(e){}
+ let best=0;try{best=Number(localStorage.getItem('vasundharaBalloonBest')||0)}catch(e){}
  bestEl.textContent=best;
  function showJoke(){const j=jokes[Math.floor(Math.random()*jokes.length)];document.getElementById('jokeReveal').innerHTML='<div><strong>'+j[0]+'</strong>'+j[1]+'</div>';playChime()}
  document.getElementById('jokeBtn').addEventListener('click',showJoke);
  function spawnGameBalloon(){if(!gameRunning)return;const b=document.createElement('button');b.className='game-balloon';b.type='button';b.setAttribute('aria-label','Pop balloon for one point');const colors=['#ff8bb0','#ffd166','#a999ff','#8edce5','#ff9f68','#b9e769'];const color=colors[Math.floor(Math.random()*colors.length)];b.style.background=color;b.style.color=color;b.style.left=Math.max(2,Math.random()*88)+'%';b.style.setProperty('--rise',(3.3+Math.random()*1.8)+'s');b.style.transform='scale('+(0.78+Math.random()*.45)+')';b.addEventListener('click',()=>{if(!gameRunning||b.classList.contains('popped'))return;gameScore++;scoreEl.textContent=gameScore;const r=b.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,18);b.classList.add('popped');setTimeout(()=>b.remove(),200);if(gameScore%3===0)showJoke();playChime()});arena.appendChild(b);setTimeout(()=>b.remove(),5400)}
- function endGame(){gameRunning=false;clearInterval(spawnTimer);clearInterval(countTimer);arena.querySelectorAll('.game-balloon').forEach(b=>b.remove());intro.style.display='grid';intro.innerHTML='<div>🎉 Time’s up!<br><b>You popped '+gameScore+' balloon'+(gameScore===1?'':'s')+'!</b><br>'+ (gameScore>=10?'Balloon-popping superstar! 🏆':'Want to beat your score? Give it another go!')+'</div>';startBtn.textContent='Play again 🔁';if(gameScore>best){best=gameScore;bestEl.textContent=best;try{localStorage.setItem('kratiBalloonBest',String(best))}catch(e){}}burst(innerWidth/2,innerHeight*.45,Math.min(120,35+gameScore*4));}
+ function endGame(){gameRunning=false;clearInterval(spawnTimer);clearInterval(countTimer);arena.querySelectorAll('.game-balloon').forEach(b=>b.remove());intro.style.display='grid';intro.innerHTML='<div>🎉 Time’s up!<br><b>You popped '+gameScore+' balloon'+(gameScore===1?'':'s')+'!</b><br>'+ (gameScore>=10?'Balloon-popping superstar! 🏆':'Want to beat your score? Give it another go!')+'</div>';startBtn.textContent='Play again 🔁';if(gameScore>best){best=gameScore;bestEl.textContent=best;try{localStorage.setItem('vasundharaBalloonBest',String(best))}catch(e){}}burst(innerWidth/2,innerHeight*.45,Math.min(120,35+gameScore*4));}
  startBtn.addEventListener('click',()=>{if(gameRunning)return;clearInterval(spawnTimer);clearInterval(countTimer);gameRunning=true;gameScore=0;gameTime=20;scoreEl.textContent='0';timeEl.textContent='20';intro.style.display='none';startBtn.textContent='Playing… 🎈';spawnGameBalloon();spawnTimer=setInterval(spawnGameBalloon,530);countTimer=setInterval(()=>{gameTime--;timeEl.textContent=gameTime;if(gameTime<=0)endGame()},1000)});
 
  document.getElementById('finalBtn').addEventListener('click',()=>{celebrate();document.getElementById('finalBtn').textContent='🎉 Birthday magic delivered!';setTimeout(()=>document.getElementById('finalBtn').textContent='One last burst of confetti ✨',2600)});
