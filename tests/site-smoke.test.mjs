@@ -31,5 +31,5 @@ test('static deployment files and package scripts are configured', async () => {
   assert.match(workflow, /run: npm test/);
   assert.match(workflow, /needs: test/);
   assert.match(netlify, /command = "npm test"/);
-  assert.equal(pkg.scripts.test, 'node --test');
+  assert.equal(pkg.scripts.test, 'node --test tests/site-smoke.test.mjs');
 });
