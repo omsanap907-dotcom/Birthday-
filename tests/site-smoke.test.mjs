@@ -9,7 +9,7 @@ function inlineScripts(html) {
 }
 test('birthday homepage keeps its core interactions and game link', async () => {
   const html = await read('../index.html');
-  for (const marker of ['id="surpriseBtn"', 'id="cake"', 'id="giftBtn"', 'id="wishText"', 'id="balloon-game"', 'id="monkey-game-promo"', 'href="./monkey-game.html"']) {
+  for (const marker of ['id="surpriseBtn"', 'id="cake"', 'id="giftBtn"', 'id="wishText"', 'id="balloon-game"', 'id="monkey-game-promo"', 'href="./monkey-game.html"', 'Vasundhara']) {
     assert.ok(html.includes(marker), `Missing homepage feature: ${marker}`);
   }
   assert.match(html, /<meta name="viewport"/i);
@@ -18,7 +18,7 @@ test('birthday homepage keeps its core interactions and game link', async () => 
 });
 test('monkey game includes Vasundhara branding, time-based difficulty and core mechanics', async () => {
   const html = await read('../monkey-game.html');
-  for (const marker of ['Vasundhara', 'id="game"', 'id="score"', 'id="lives"', 'id="best"', 'id="start"', 'id="jump"', 'id="pause"', 'localStorage.setItem', 'function togglePause', 'function endGame', 'speed=Math.min(470,250+worldTime*5.5)', 'Back to the birthday surprise']) {
+  for (const marker of ['Vasundhara', 'id="game"', 'id="score"', 'id="lives"', 'id="best"', 'id="start"', 'id="jump"', 'id="pause"', 'localStorage.setItem', 'function togglePause', 'function endGame', 'score/35', 'speed=Math.min(650,250+worldTime*3.5+score*18)', 'Back to the birthday surprise']) {
     assert.ok(html.includes(marker), `Missing monkey game feature: ${marker}`);
   }
   assert.match(html, /<meta name="viewport"/i);
