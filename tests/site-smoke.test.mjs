@@ -35,6 +35,15 @@ test('top-down spaceship game has controls, scoring, difficulty and valid JavaSc
   assert.equal(scripts.length, 1, 'Spaceship game should have one inline application script');
   for (const script of scripts) assert.doesNotThrow(() => new vm.Script(script), 'Spaceship game inline JavaScript should parse');
 });
+test('Neon Maze has touch, fullscreen, collecting and time-based speed features', async () => {
+  const html = await read('../maze-game.html');
+  for (const marker of ['Vasundhara', 'id="maze"', 'id="fullscreen"', 'data-dir="up"', 'pointerdown', 'pointerup', 'function makeGrid', 'function move(dir)', 'elapsed*.0028', 'localStorage.setItem', 'Collect every star']) {
+    assert.ok(html.includes(marker), `Missing maze feature: ${marker}`);
+  }
+  const scripts = inlineScripts(html);
+  assert.equal(scripts.length, 1, 'Maze should have one inline application script');
+  for (const script of scripts) assert.doesNotThrow(() => new vm.Script(script), 'Maze inline JavaScript should parse');
+});
 test('static deployment files and package scripts are configured', async () => {
   const [workflow, netlify, pkg] = await Promise.all([read('../.github/workflows/pages.yml'), read('../netlify.toml'), read('../package.json').then(JSON.parse)]);
   assert.match(workflow, /run: npm test/);
