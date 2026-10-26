@@ -16,9 +16,9 @@ test('birthday homepage keeps its core interactions and game link', async () => 
   assert.ok(inlineScripts(html).length > 0, 'Homepage should contain its interactive script');
   for (const script of inlineScripts(html)) assert.doesNotThrow(() => new vm.Script(script), 'Homepage inline JavaScript should parse');
 });
-test('monkey game includes accessible controls and core mechanics', async () => {
+test('monkey game includes Vasundhara branding, time-based difficulty and core mechanics', async () => {
   const html = await read('../monkey-game.html');
-  for (const marker of ['id="game"', 'id="score"', 'id="lives"', 'id="best"', 'id="start"', 'id="jump"', 'id="pause"', 'localStorage.setItem', 'function togglePause', 'function endGame', 'Back to the birthday surprise']) {
+  for (const marker of ['Vasundhara', 'id="game"', 'id="score"', 'id="lives"', 'id="best"', 'id="start"', 'id="jump"', 'id="pause"', 'localStorage.setItem', 'function togglePause', 'function endGame', 'speed=Math.min(470,250+worldTime*5.5)', 'Back to the birthday surprise']) {
     assert.ok(html.includes(marker), `Missing monkey game feature: ${marker}`);
   }
   assert.match(html, /<meta name="viewport"/i);
