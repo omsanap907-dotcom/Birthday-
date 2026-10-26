@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#174d35"><meta name="description" content="Play Krati's Birthday Monkey Run: collect bananas, jump over coconuts and beat your high score.">
-<title>Birthday Monkey Run 🐒🍌</title>
+<meta name="theme-color" content="#174d35"><meta name="description" content="Play Vasundhara's Birthday Monkey Run: collect bananas, jump over coconuts and beat your high score.">
+<title>Vasundhara's Birthday Monkey Run 🐒🍌</title>
 <style>
 :root{color-scheme:light;--forest:#174d35;--forest2:#0d3023;--lime:#d6ff72;--cream:#fffdf0;--ink:#204b34;--muted:#66816c}
 *{box-sizing:border-box}html{min-height:100%;background:var(--forest2)}body{margin:0;min-height:100vh;padding:clamp(12px,3vw,26px);display:grid;place-items:center;font-family:ui-rounded,system-ui,-apple-system,"Segoe UI",sans-serif;color:white;background:radial-gradient(ellipse at top,#397b4f 0,#174d35 48%,#0d3023 100%)}button{font:inherit;touch-action:manipulation}button:focus-visible,a:focus-visible{outline:3px solid #ffcb66;outline-offset:3px}.app{width:min(100%,820px)}.hero{text-align:center;margin:0 auto 16px}.badge{display:inline-flex;gap:7px;align-items:center;border:1px solid #ffffff30;background:#ffffff12;border-radius:999px;padding:7px 12px;font-size:11px;font-weight:850;letter-spacing:1.5px;text-transform:uppercase}.hero h1{font-size:clamp(34px,8vw,62px);letter-spacing:-2.5px;line-height:1.02;margin:13px 0 8px}.hero h1 span{color:var(--lime)}.hero p{margin:0 auto;max-width:520px;color:#d8eedc;font-size:14px;line-height:1.6}.panel{padding:clamp(8px,2vw,14px);border-radius:25px;background:var(--cream);color:var(--ink);box-shadow:0 24px 70px #00180e70}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:2px 2px 12px}.stat{padding:10px 12px;background:#edf5e1;border:1px solid #e4eed8;border-radius:13px;font-size:12px;font-weight:800;white-space:nowrap}.stat span{font-variant-numeric:tabular-nums}.stage{position:relative;overflow:hidden;border:1px solid #cce6bd;border-radius:18px;background:#a9e8fa;isolation:isolate}.stage canvas{display:block;width:100%;height:clamp(270px,55vw,410px);touch-action:manipulation}.overlay{position:absolute;inset:0;z-index:2;display:grid;place-items:center;padding:18px;background:#0c392aa8;text-align:center;color:white}.overlay[hidden]{display:none}.overlay-card{width:min(100%,370px);padding:23px 20px;border:1px solid #ffffff40;border-radius:22px;background:#164832f5;box-shadow:0 18px 45px #08281955}.overlay-card .emoji{font-size:48px;line-height:1.3}.overlay-card h2{font-size:clamp(23px,5vw,29px);margin:7px 0}.overlay-card p{font-size:13px;line-height:1.7;color:#e0f2e2;margin:0 0 16px}.btn{border:0;border-radius:999px;padding:12px 19px;background:var(--lime);color:#183c2a;font-weight:900;cursor:pointer;box-shadow:0 6px 0 #8db33f;transition:transform .12s,filter .12s}.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}.btn:active{transform:translateY(2px);box-shadow:0 3px 0 #8db33f}.controls{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 3px 2px;flex-wrap:wrap}.hint{font-size:12px;line-height:1.6;color:var(--muted)}.control-buttons{display:flex;gap:9px}.control{min-width:58px;height:48px;padding:0 12px;border:1px solid #d8e8cc;border-radius:14px;background:#edf5e1;color:var(--ink);font-size:20px;font-weight:900;cursor:pointer}.control:disabled{opacity:.5;cursor:not-allowed}.note{text-align:center;color:#c6e6cb;font-size:11px;line-height:1.7;margin:16px 0 0}.note a{color:var(--lime);font-weight:800;text-decoration-thickness:1px;text-underline-offset:3px}@media(max-width:460px){.hero{margin-bottom:12px}.hero h1{letter-spacing:-1.5px}.stats{gap:5px}.stat{padding:9px 7px;text-align:center;font-size:11px}.controls{justify-content:center}.hint{width:100%;text-align:center}.control-buttons{width:100%;justify-content:center}.control{flex:1;max-width:150px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
@@ -11,14 +11,14 @@
 </head>
 <body>
 <main class="app">
-<header class="hero"><div class="badge">🎂 Birthday arcade · special edition</div><h1>Krati's <span>Monkey Run!</span></h1><p>Grab the bananas, leap over the coconuts and see how long you can last. Ready, jungle champion? 🐒</p></header>
-<section class="panel" aria-label="Birthday Monkey Run game">
+<header class="hero"><div class="badge">🎂 Birthday arcade · special edition</div><h1>Vasundhara's <span>Monkey Run!</span></h1><p>Grab the bananas, leap over the coconuts and see how long you can last. Ready, jungle champion? 🐒</p></header>
+<section class="panel" aria-label="Vasundhara's Birthday Monkey Run game">
 <div class="stats" aria-live="polite"><div class="stat">🍌 Bananas: <span id="score">0</span></div><div class="stat">❤️ Lives: <span id="lives">3</span></div><div class="stat">🏆 Best: <span id="best">0</span></div></div>
 <div class="stage" id="stage"><canvas id="game" width="800" height="410" aria-label="Game: collect bananas and jump over coconuts"></canvas>
-<div class="overlay" id="overlay"><div class="overlay-card"><div class="emoji">🐒🍌🎉</div><h2 id="overlayTitle">Birthday Banana Dash!</h2><p id="overlayText">Collect 🍌 bananas for points. Jump over 🥥 coconuts to protect your three lives. Use the jump button, tap the game, or press Space / ↑.</p><button class="btn" id="start" type="button">Let's play!</button></div></div></div>
+<div class="overlay" id="overlay"><div class="overlay-card"><div class="emoji">🐒🍌🎉</div><h2 id="overlayTitle">Vasundhara's Birthday Banana Dash!</h2><p id="overlayText">Collect 🍌 bananas for points. Jump over 🥥 coconuts to protect your three lives. The game gets faster as time passes! Use the jump button, tap the game, or press Space / ↑.</p><button class="btn" id="start" type="button">Let's play!</button></div></div></div>
 <div class="controls"><div class="hint">Keyboard: <b>Space</b> / <b>↑</b> to jump<br>Phone: tap the game or press JUMP</div><div class="control-buttons"><button class="control" id="jump" type="button" aria-label="Jump">⬆️ <span style="font-size:12px">JUMP</span></button><button class="control" id="pause" type="button" aria-label="Pause game" disabled>Ⅱ</button></div></div>
 </section>
-<p class="note">Made with birthday energy 💚 · <a href="./index.html">Back to the birthday surprise</a></p>
+<p class="note">Made especially for Vasundhara with birthday energy 💚 · <a href="./index.html">Back to the birthday surprise</a></p>
 </main>
 <script>
 (()=>{
@@ -27,8 +27,8 @@ const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
 const scoreEl=document.getElementById('score'),livesEl=document.getElementById('lives'),bestEl=document.getElementById('best');
 const overlay=document.getElementById('overlay'),overlayTitle=document.getElementById('overlayTitle'),overlayText=document.getElementById('overlayText'),startBtn=document.getElementById('start'),jumpBtn=document.getElementById('jump'),pauseBtn=document.getElementById('pause');
 const W=800,H=410,groundY=326,playerX=116,playerW=48,playerH=52;
-let state='ready',score=0,lives=3,best=0,items=[],lastTime=0,spawnIn=.6,speed=260,playerY=groundY-playerH,velocityY=0,invulnerable=0,raf=0,worldTime=0;
-try{best=Math.max(0,Number(localStorage.getItem('kratiMonkeyBest')||0)||0)}catch(e){}
+let state='ready',score=0,lives=3,best=0,items=[],lastTime=0,spawnIn=.6,speed=250,playerY=groundY-playerH,velocityY=0,invulnerable=0,raf=0,worldTime=0;
+try{best=Math.max(0,Number(localStorage.getItem('vasundharaMonkeyBest')||0)||0)}catch(e){}
 bestEl.textContent=best;
 const rand=(min,max)=>min+Math.random()*(max-min);
 function resizeCanvas(){const rect=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.max(1,Math.round(rect.width*dpr));canvas.height=Math.max(1,Math.round(rect.height*dpr));ctx.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);draw()}
@@ -45,16 +45,18 @@ function drawPlayer(){if(invulnerable>0&&Math.floor(worldTime*14)%2===0)return;c
 function drawItems(){for(const item of items){ctx.font=item.type==='banana'?'35px system-ui,Apple Color Emoji,Segoe UI Emoji':'34px system-ui,Apple Color Emoji,Segoe UI Emoji';ctx.fillText(item.type==='banana'?'🍌':'🥥',item.x,item.y+31)}}
 function draw(){if(!ctx)return;ctx.clearRect(0,0,W,H);drawBackground();drawItems();drawPlayer();if(state==='paused'){ctx.fillStyle='#123b2ab0';ctx.fillRect(0,0,W,H);ctx.fillStyle='#fff';ctx.textAlign='center';ctx.font='bold 32px system-ui';ctx.fillText('PAUSED',W/2,H/2);ctx.textAlign='left'}}
 function updateStats(){scoreEl.textContent=score;livesEl.textContent=lives}
-function reset(){score=0;lives=3;items=[];lastTime=0;spawnIn=.65;speed=260;playerY=groundY-playerH;velocityY=0;invulnerable=0;worldTime=0;updateStats()}
+function reset(){score=0;lives=3;items=[];lastTime=0;spawnIn=.65;speed=250;playerY=groundY-playerH;velocityY=0;invulnerable=0;worldTime=0;updateStats()}
 function start(){cancelAnimationFrame(raf);reset();state='playing';overlay.hidden=true;pauseBtn.disabled=false;pauseBtn.textContent='Ⅱ';pauseBtn.setAttribute('aria-label','Pause game');lastTime=performance.now();raf=requestAnimationFrame(loop)}
 function jump(){if(state!=='playing')return;if(playerY>=groundY-playerH-1){velocityY=-680}}
 function spawnItem(){const banana=Math.random()<.66;const y=banana?groundY-rand(5,65):groundY-28;items.push({type:banana?'banana':'coconut',x:W+25,y,w:35,h:35,hit:false})}
 function overlaps(a,b){return a.x+10<b.x+b.w&&a.x+a.w-10>b.x+7&&a.y+8<b.y+b.h&&a.y+a.h-5>b.y+5}
-function endGame(){state='over';cancelAnimationFrame(raf);pauseBtn.disabled=true;pauseBtn.textContent='Ⅱ';const newRecord=score>best;if(newRecord){best=score;bestEl.textContent=best;try{localStorage.setItem('kratiMonkeyBest',String(best))}catch(e){}}overlayTitle.textContent=score>=15?'Banana legend!':'Nice run, birthday champ!';overlayText.textContent='You collected '+score+' banana'+(score===1?'':'s')+'. '+(newRecord?'New personal best! ':'')+'Want to try again and beat your score?';startBtn.textContent='Play again 🔁';overlay.hidden=false;draw()}
+function endGame(){state='over';cancelAnimationFrame(raf);pauseBtn.disabled=true;pauseBtn.textContent='Ⅱ';const newRecord=score>best;if(newRecord){best=score;bestEl.textContent=best;try{localStorage.setItem('vasundharaMonkeyBest',String(best))}catch(e){}}overlayTitle.textContent=score>=15?'Banana legend, Vasundhara!':'Nice run, Vasundhara!';overlayText.textContent='You collected '+score+' banana'+(score===1?'':'s')+'. '+(newRecord?'New personal best! ':'')+'Want to try again and beat your score?';startBtn.textContent='Play again 🔁';overlay.hidden=false;draw()}
 function loop(now){
 if(state!=='playing')return;
-const dt=Math.min(Math.max((now-lastTime)/1000,0),.035);lastTime=now;worldTime+=dt;speed=Math.min(430,260+score*2.6);spawnIn-=dt;
-if(spawnIn<=0){spawnItem();spawnIn=Math.max(.62,1.18-score*.009)+rand(0,.3)}
+const dt=Math.min(Math.max((now-lastTime)/1000,0),.035);lastTime=now;worldTime+=dt;
+// Smooth time-based difficulty: accelerate from 250 to 470 px/s over about 40 seconds.
+speed=Math.min(470,250+worldTime*5.5);spawnIn-=dt;
+if(spawnIn<=0){spawnItem();const difficulty=Math.min(1,worldTime/40);spawnIn=Math.max(.52,1.2-difficulty*.48)+rand(0,.24)}
 velocityY+=1750*dt;playerY+=velocityY*dt;if(playerY>groundY-playerH){playerY=groundY-playerH;velocityY=0}
 if(invulnerable>0)invulnerable=Math.max(0,invulnerable-dt);
 const player={x:playerX+4,y:playerY+5,w:playerW-8,h:playerH-8};
