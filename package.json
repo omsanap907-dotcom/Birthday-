@@ -4,6 +4,6 @@
   "private": true,
   "description": "Birthday surprise website and Monkey Run mini-game",
   "scripts": {
-    "test": "node --test"
+    "test": "node --test tests/site-smoke.test.mjs"
   }
 }
