@@ -5,7 +5,7 @@ import vm from 'node:vm';
 
 const read = (path) => readFile(new URL(path, import.meta.url), 'utf8');
 function inlineScripts(html) {
-  return [...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/gi)].map((match) => match[1]).filter((script) => script.trim());
+  return [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map((match) => match[1]).filter((script) => script.trim());
 }
 test('birthday homepage keeps its core interactions and game link', async () => {
   const html = await read('../index.html');
