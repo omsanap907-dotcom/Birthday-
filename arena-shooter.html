@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#101820">
+<meta name="description" content="A fast, original cartoon arena shooter starring Vasundhara.">
+<title>Vasundhara Ops — Arena Shooter</title>
+<style>
+:root{color-scheme:dark;--lime:#b7ff4a;--cyan:#45d9ff;--red:#ff5b6e}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#101820;color:#f4f7f9;font-family:system-ui,-apple-system,Segoe UI,sans-serif;touch-action:none}body{display:flex;align-items:center;justify-content:center}
+#gameWrap{position:relative;width:min(100vw,1400px);height:min(100vh,850px);background:#17242b;overflow:hidden;border:1px solid #34454c}
+canvas{display:block;width:100%;height:100%;object-fit:contain}
+.hud{position:absolute;inset:0;pointer-events:none}.top{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}.panel{background:#101820dc;border:1px solid #62747c;border-radius:12px;padding:9px 12px;box-shadow:0 4px 16px #0004}.brand{font-size:11px;letter-spacing:2px;color:var(--lime);font-weight:900}.statline{font-size:13px;font-weight:800}.health{height:7px;width:140px;background:#39464d;border-radius:9px;overflow:hidden;margin-top:7px}.health span{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--lime),#45d9ff);transition:width .15s}.score{font-size:24px;font-weight:950;line-height:1}.score small{font-size:10px;color:#b7c3c8;letter-spacing:1px;display:block;margin-top:5px}.weapon{font-size:12px;text-align:right}.weapon strong{font-size:16px;color:var(--lime)}.iconbtn{pointer-events:auto;background:#1b2930;color:#fff;border:1px solid #61747c;border-radius:10px;padding:8px 11px;font-weight:800}
+.bottom-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:11px;color:#e1e9e9;background:#101820b8;border:1px solid #52636a;border-radius:999px;padding:7px 13px;white-space:nowrap}
+.overlay{position:absolute;inset:0;background:linear-gradient(135deg,#101820ed,#152b30e8);display:flex;align-items:center;justify-content:center;padding:20px;z-index:5}.card{width:min(520px,100%);border:1px solid #53656b;background:#17252b;border-radius:22px;padding:28px;box-shadow:0 22px 70px #0008}.eyebrow{font-size:10px;letter-spacing:3px;color:var(--lime);font-weight:900}.card h1{font-size:clamp(32px,7vw,56px);line-height:.98;letter-spacing:-2px;margin:12px 0}.card p{color:#b9c8cc;line-height:1.65;font-size:14px}.rules{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:20px 0}.rule{border:1px solid #35484f;border-radius:11px;padding:11px;font-size:12px;color:#dbe5e7}.rule b{display:block;color:var(--lime);margin-bottom:3px}.primary{background:var(--lime);color:#101820;border:0;border-radius:12px;padding:14px 18px;font-weight:950;width:100%;font-size:15px}.secondary{display:block;text-align:center;color:#b7c7cb;margin-top:14px;font-size:12px;text-decoration:none}.touch{position:absolute;bottom:28px;left:22px;right:22px;display:none;justify-content:space-between;align-items:flex-end;pointer-events:none}.pad{display:flex;gap:9px;align-items:center}.touch button{pointer-events:auto;border:1px solid #e5f3f65c;background:#17252bbd;color:#fff;border-radius:50%;width:58px;height:58px;font-size:22px;font-weight:900;backdrop-filter:blur(5px);touch-action:none}.touch .shoot{width:76px;height:76px;color:var(--lime);border-color:var(--lime);font-size:13px}.touch .jump{width:57px;height:57px;font-size:11px}.touch .grenade{width:51px;height:51px;font-size:18px}.muted{color:#a7b7bc;font-size:11px}@media(pointer:coarse),(max-width:700px){.touch{display:flex}.bottom-hint{display:none}.top{top:7px;left:7px;right:7px}.panel{padding:7px 8px}.health{width:90px}.brand{font-size:9px;letter-spacing:1px}.score{font-size:19px}.weapon{font-size:10px}.weapon strong{font-size:13px}.iconbtn{padding:7px 8px;font-size:11px}.card{padding:22px}.rules{gap:6px}.rule{padding:9px}.touch{bottom:17px;left:12px;right:12px}.touch button{width:49px;height:49px;font-size:18px}.touch .shoot{width:65px;height:65px;font-size:11px}.touch .jump{width:48px;height:48px;font-size:10px}.touch .grenade{width:43px;height:43px}}@media(max-height:500px){.touch{bottom:7px}.touch button{width:40px;height:40px}.touch .shoot{width:52px;height:52px}.card{padding:15px}.card h1{font-size:32px}.rules{margin:10px 0}}
+</style>
+</head>
+<body>
+<div id="gameWrap">
+<canvas id="arena" width="1200" height="700" aria-label="Cartoon arena shooter game"></canvas>
+<div class="hud">
+ <div class="top">
+  <div class="panel"><div class="brand">VASUNDHARA OPS</div><div class="statline">HP <span id="hpText">100</span>%</div><div class="health"><span id="hpBar"></span></div></div>
+  <div class="panel score"><span id="kills">0</span> <small>ELIMS</small></div>
+  <div class="panel weapon"><strong id="ammo">30 / ∞</strong><br>ASSAULT RIFLE</div>
+  <button class="iconbtn" id="pauseBtn" aria-label="Pause game">Ⅱ</button>
+ </div>
+ <div class="bottom-hint">MOVE: A / D or ← → &nbsp; • &nbsp; JUMP: W / ↑ / SPACE &nbsp; • &nbsp; AIM: MOUSE &nbsp; • &nbsp; FIRE: CLICK / F</div>
+ <div class="touch">
+  <div class="pad"><button data-hold="left" aria-label="Move left">◀</button><button data-hold="right" aria-label="Move right">▶</button><button class="jump" data-action="jump">JUMP</button></div>
+  <div class="pad"><button class="grenade" data-action="grenade" aria-label="Throw grenade">✹</button><button class="shoot" data-hold="fire">FIRE</button></div>
+ </div>
+</div>
+<div class="overlay" id="startOverlay"><div class="card"><div class="eyebrow">ARCADE COMBAT • SINGLE PLAYER</div><h1>DROP IN.<br><span style="color:var(--lime)">LOCK ON.</span></h1><p>Jump between platforms, use your jetpack to stay airborne, and outscore the rival bots in a neon jungle arena. Fast rounds, silly chaos, all original.</p><div class="rules"><div class="rule"><b>WASD / ARROWS</b>Move and jump</div><div class="rule"><b>MOUSE / FIRE</b>Aim and shoot</div><div class="rule"><b>SPACE / JUMP</b>Jet-assisted leap</div><div class="rule"><b>G / ✹</b>Throw a grenade</div></div><button class="primary" id="startBtn">START MATCH →</button><a class="secondary" href="./index.html">← Back to the birthday surprise</a></div></div>
+<div class="overlay" id="endOverlay" style="display:none"><div class="card"><div class="eyebrow">MATCH COMPLETE</div><h1 id="endTitle">NICE RUN.</h1><p id="endText">The arena is quiet. For now.</p><button class="primary" id="againBtn">PLAY AGAIN ↻</button><a class="secondary" href="./index.html">← Back to the birthday surprise</a></div></div>
+</div>
+<script>
+(() => {
+'use strict';
+const canvas=document.getElementById('arena'),ctx=canvas.getContext('2d');
+const W=1200,H=700,worldW=2400,worldH=700;
+const $=id=>document.getElementById(id);
+const keys=new Set(),held={left:false,right:false,fire:false};
+let running=false,paused=false,last=0,elapsed=0,shots=[],particles=[],grenades=[],bots=[],camera=0,kills=0,ammo=30,reload=0,spawnTimer=0,player;
+const platforms=[{x:0,y:635,w:510,h:65},{x:590,y:635,w:390,h:65},{x:1060,y:635,w:410,h:65},{x:1570,y:635,w:390,h:65},{x:2050,y:635,w:350,h:65},{x:240,y:520,w:210,h:18},{x:520,y:440,w:200,h:18},{x:830,y:530,w:170,h:18},{x:1100,y:450,w:230,h:18},{x:1430,y:520,w:210,h:18},{x:1740,y:425,w:220,h:18},{x:2050,y:520,w:190,h:18},{x:650,y:315,w:160,h:18},{x:1300,y:320,w:180,h:18},{x:1880,y:290,w:180,h:18}];
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),rand=(a,b)=>a+Math.random()*(b-a);
+function reset(){elapsed=0;kills=0;ammo=30;reload=0;spawnTimer=0;shots=[];particles=[];grenades=[];camera=0;player={x:120,y:540,vx:0,vy:0,w:30,h:48,hp:100,face:1,ground:false,invuln:0,fireCD:0,grenades:3};bots=[];for(let i=0;i<5;i++)spawnBot(i*400+420);updateHUD()}
+function spawnBot(x){bots.push({x:clamp(x,80,worldW-90),y:rand(330,570),vx:0,vy:0,w:30,h:46,hp:100,face:-1,ground:false,fireCD:rand(.5,1.7),think:0,color:['#ff5964','#ff9f43','#c17aff','#4ed9e8','#ff648f'][Math.floor(rand(0,5))],alive:true})}
+function hitBox(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
+function collides(ent,axis){for(const p of platforms){if(hitBox(ent,p)){if(axis==='y'){if(ent.vy>0){ent.y=p.y-ent.h;ent.ground=true}else if(ent.vy<0)ent.y=p.y+p.h;ent.vy=0}else{if(ent.vx>0)ent.x=p.x-ent.w;else if(ent.vx<0)ent.x=p.x+p.w;ent.vx=0}}}}
+function moveEntity(e,dt){e.x+=e.vx*dt;collides(e,'x');e.y+=e.vy*dt; e.ground=false;collides(e,'y');e.x=clamp(e.x,0,worldW-e.w);if(e.y>H+100){e.hp=0}}
+function burst(x,y,color,n=8){for(let i=0;i<n;i++)particles.push({x,y,vx:rand(-180,180),vy:rand(-200,80),life:rand(.2,.65),max:.65,color,size:rand(2,5)})}
+function fire(from,toBot=false){if(!running||paused||from.fireCD>0)return;if(from===player){if(reload>0)return;if(ammo<=0){reload=1.0;return}ammo--;updateHUD();from.fireCD=.12}else from.fireCD=rand(.6,1.25);
+const dir=from.face||1, sx=from.x+from.w/2+dir*15,sy=from.y+from.h*.42;
+let targetX=toBot?toBot.x+toBot.w/2:(mouseX+camera),targetY=toBot?toBot.y+toBot.h*.4:mouseY;
+let dx=targetX-sx,dy=targetY-sy;if(!toBot&&Math.abs(dx)<5){dx=dir*100}const mag=Math.hypot(dx,dy)||1;
+shots.push({x:sx,y:sy,vx:dx/mag*790,vy:dy/mag*790,life:1.3,team:from===player?'player':'bot',damage:toBot?toBot: null});burst(sx+dir*8,sy,'#ffe68b',3)}
+let mouseX=700,mouseY=330;
+canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect();mouseX=(e.clientX-r.left)/r.width*W;mouseY=(e.clientY-r.top)/r.height*H});
+canvas.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button===0){held.fire=true;const r=canvas.getBoundingClientRect();mouseX=(e.clientX-r.left)/r.width*W;mouseY=(e.clientY-r.top)/r.height*H}});
+window.addEventListener('pointerup',()=>held.fire=false);
+function throwGrenade(){if(!running||paused||player.grenades<=0)return;player.grenades--;grenades.push({x:player.x+player.w/2,y:player.y+10,vx:player.face*300,vy:-380,t:1.5});burst(player.x,player.y,'#b7ff4a',5)}
+function update(dt){if(!running||paused)return;elapsed+=dt;if(reload>0){reload-=dt;if(reload<=0){ammo=30;updateHUD()}}player.fireCD=Math.max(0,player.fireCD-dt);player.invuln=Math.max(0,player.invuln-dt);
+let move=(keys.has('ArrowRight')||keys.has('d')||held.right?1:0)-(keys.has('ArrowLeft')||keys.has('a')||held.left?1:0);player.vx=move*255;if(move)player.face=move;
+if((keys.has('ArrowUp')||keys.has('w')||keys.has(' ')||keys.has('Space')||keys.has('Spacebar'))&&player.ground){player.vy=-520;player.ground=false}
+if(keys.has('g')){keys.delete('g');throwGrenade()}
+player.vy+=1250*dt;player.vy=Math.min(player.vy,780);moveEntity(player,dt);
+if(held.fire||keys.has('f'))fire(player);
+for(const b of bots){if(!b.alive)continue;b.fireCD-=dt;b.think-=dt;if(b.think<=0){b.think=rand(.25,.8);let dx=(player.x-b.x);b.face=dx>=0?1:-1;b.vx=Math.abs(dx)>300?b.face*rand(65,135):rand(-55,55);if(b.ground&&Math.random()<.18)b.vy=-rand(300,450)}b.vy+=1150*dt;b.vy=Math.min(b.vy,760);moveEntity(b,dt);if(b.fireCD<=0&&Math.abs(player.x-b.x)<760&&Math.abs(player.y-b.y)<250){fire(b,player)}}
+for(const s of shots){s.x+=s.vx*dt;s.y+=s.vy*dt;s.life-=dt;for(const p of platforms){if(s.x>p.x&&s.x<p.x+p.w&&s.y>p.y&&s.y<p.y+p.h){s.life=0;burst(s.x,s.y,'#f3f6c7',2);break}}if(s.team==='player'){for(const b of bots){if(b.alive&&s.life>0&&s.x>b.x&&s.x<b.x+b.w&&s.y>b.y&&s.y<b.y+b.h){b.hp-=34;s.life=0;burst(s.x,s.y,b.color,7);if(b.hp<=0){b.alive=false;kills++;burst(b.x+b.w/2,b.y+b.h/2,b.color,22);updateHUD();spawnTimer=1.2}break}}}else if(s.life>0&&player.invuln<=0&&s.x>player.x&&s.x<player.x+player.w&&s.y>player.y&&s.y<player.y+player.h){player.hp-=9;player.invuln=.18;s.life=0;burst(s.x,s.y,'#ff5b6e',6);updateHUD();if(player.hp<=0)finish(false)}}
+shots=shots.filter(s=>s.life>0&&s.x>-50&&s.x<worldW+50);
+for(const g of grenades){g.t-=dt;g.vy+=650*dt;g.x+=g.vx*dt;g.y+=g.vy*dt;for(const p of platforms){if(g.x>p.x&&g.x<p.x+p.w&&g.y>p.y-4&&g.y<p.y+p.h){g.y=p.y-5;g.vy*=-.35;g.vx*=.7}}if(g.t<=0){burst(g.x,g.y,'#ffb347',28);for(const b of bots){if(b.alive&&Math.hypot(b.x-g.x,b.y-g.y)<145){b.hp-=70;if(b.hp<=0){b.alive=false;kills++;updateHUD()}}}if(Math.hypot(player.x-g.x,player.y-g.y)<95){player.hp-=18;updateHUD()}}}grenades=grenades.filter(g=>g.t>0);
+for(const p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=300*dt;p.life-=dt}particles=particles.filter(p=>p.life>0);
+spawnTimer-=dt;if(spawnTimer<=0&&bots.filter(b=>b.alive).length<5){spawnBot(rand(450,worldW-120));spawnTimer=1.6}
+camera=clamp(player.x+player.w/2-W*.48,0,worldW-W);if(elapsed>=120)finish(true)}
+function drawBackground(){const sky=ctx.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#7eb7bb');sky.addColorStop(.58,'#b2c6a0');sky.addColorStop(1,'#334d43');ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
+for(let layer=0;layer<3;layer++){ctx.fillStyle=['#769c91','#557b70','#395b52'][layer];ctx.beginPath();ctx.moveTo(0,500+layer*45);for(let x=0;x<=W+80;x+=80){ctx.lineTo(x,330+layer*65+Math.sin((x+layer*110)/130)*65)}ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.closePath();ctx.fill()}
+ctx.save();ctx.translate(-camera*.22,0);for(let i=0;i<18;i++){let x=i*170+30;ctx.fillStyle='#1d443b';ctx.fillRect(x,350,14,150);ctx.beginPath();ctx.moveTo(x-45,370);ctx.lineTo(x+7,260+Math.sin(i)*25);ctx.lineTo(x+55,370);ctx.fill();ctx.beginPath();ctx.moveTo(x-35,405);ctx.lineTo(x+7,310);ctx.lineTo(x+60,405);ctx.fill()}ctx.restore()}
+function drawPlatform(p){ctx.fillStyle='#4d5c52';ctx.fillRect(p.x,p.y,p.w,p.h);ctx.fillStyle='#7a8d72';ctx.fillRect(p.x,p.y,p.w,7);ctx.fillStyle='#253c36';for(let x=p.x+12;x<p.x+p.w;x+=34){ctx.fillRect(x,p.y+15,3,10);ctx.fillRect(x+12,p.y+33,13,3)}ctx.fillStyle='#6d7e69';for(let x=p.x+8;x<p.x+p.w;x+=55){ctx.fillRect(x,p.y-4,17,4)}}
+function drawSoldier(e,isPlayer){const x=e.x,y=e.y;ctx.save();ctx.translate(x+e.w/2,y+e.h/2);ctx.scale(e.face||1,1);if(isPlayer&&e.invuln>0&&Math.floor(elapsed*22)%2===0)ctx.globalAlpha=.45;
+ctx.fillStyle='#0005';ctx.beginPath();ctx.ellipse(0,e.h/2+3,22,5,0,0,Math.PI*2);ctx.fill();
+ctx.fillStyle=isPlayer?'#b7ff4a':e.color;ctx.fillRect(-12,-2,24,22);ctx.fillStyle=isPlayer?'#7eb52e':'#8a4547';ctx.fillRect(-12,13,9,12);ctx.fillRect(3,13,9,12);
+ctx.fillStyle=isPlayer?'#c5b58b':'#c4b4a3';ctx.fillRect(-13,-21,26,22);ctx.fillStyle='#243139';ctx.fillRect(-10,-18,20,9);ctx.fillStyle=isPlayer?'#45d9ff':'#ff6a70';ctx.fillRect(0,-15,10,4);
+ctx.fillStyle='#283b3c';ctx.fillRect(3,-3,24,7);ctx.fillRect(19,-6,20,5);ctx.fillStyle='#111c21';ctx.fillRect(20,-7,20,3);ctx.fillStyle='#dbe4b8';ctx.fillRect(34,-7,5,2);
+ctx.restore();if(!isPlayer){ctx.fillStyle='#18262c';ctx.fillRect(x-2,y-12, e.w+4,5);ctx.fillStyle=e.color;ctx.fillRect(x-2,y-12,(e.w+4)*Math.max(0,e.hp/100),5)}}
+function render(){drawBackground();ctx.save();ctx.translate(-camera,0);for(const p of platforms)drawPlatform(p);
+for(let i=0;i<9;i++){let x=i*285+90;ctx.fillStyle='#274b3e';ctx.fillRect(x,560,9,75);ctx.fillStyle='#477d51';for(let j=0;j<4;j++){ctx.beginPath();ctx.ellipse(x+rand(-22,22),560-j*9,22,8,rand(-1,1),0,Math.PI*2);ctx.fill()}}
+for(const g of grenades){ctx.fillStyle='#b7ff4a';ctx.beginPath();ctx.arc(g.x,g.y,8,0,Math.PI*2);ctx.fill();ctx.fillStyle='#273c35';ctx.fillRect(g.x-3,g.y-12,6,5)}
+for(const s of shots){ctx.strokeStyle=s.team==='player'?'#f9ff9a':'#ff7e76';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(s.x-s.vx*.018,s.y-s.vy*.018);ctx.lineTo(s.x,s.y);ctx.stroke()}
+for(const b of bots)if(b.alive)drawSoldier(b,false);drawSoldier(player,true);
+for(const p of particles){ctx.globalAlpha=clamp(p.life/p.max,0,1);ctx.fillStyle=p.color;ctx.fillRect(p.x,p.y,p.size,p.size)}ctx.globalAlpha=1;
+ctx.restore();
+ctx.fillStyle='#101820aa';ctx.fillRect(W-190,90,174,82);ctx.strokeStyle='#c9e1d2';ctx.strokeRect(W-190,90,174,82);for(const p of platforms){ctx.fillStyle='#718a79';ctx.fillRect(W-184+p.x/worldW*162,95+p.y/H*65,Math.max(2,p.w/worldW*162),Math.max(2,p.h/H*65))}ctx.fillStyle='#b7ff4a';ctx.fillRect(W-184+player.x/worldW*162-2,95+player.y/H*65-2,5,5);for(const b of bots)if(b.alive){ctx.fillStyle=b.color;ctx.fillRect(W-184+b.x/worldW*162,95+b.y/H*65,4,4)}
+if(paused&&running){ctx.fillStyle='#10182099';ctx.fillRect(0,0,W,H);ctx.fillStyle='#fff';ctx.font='900 42px system-ui';ctx.textAlign='center';ctx.fillText('PAUSED',W/2,H/2)}}
+function updateHUD(){$('kills').textContent=kills;$('hpText').textContent=Math.max(0,Math.ceil(player?.hp??100));$('hpBar').style.width=clamp(player?.hp??100,0,100)+'%';$('ammo').textContent=reload>0?'RELOADING…':ammo+' / ∞'}
+function finish(won){running=false;$('endOverlay').style.display='flex';$('endTitle').textContent=won?'TIME UP!':'SQUAD DOWN';$('endText').textContent='Vasundhara scored '+kills+' elimination'+(kills===1?'':'s')+' in '+Math.floor(elapsed)+' seconds. '+(won?'That arena belongs to you.':'Shake it off and jump back in!')}
+function frame(t){const dt=Math.min(.032,(t-last)/1000||0);last=t;if(running&&!paused)update(dt);render();requestAnimationFrame(frame)}
+$('startBtn').addEventListener('click',()=>{reset();running=true;paused=false;$('startOverlay').style.display='none';$('endOverlay').style.display='none';$('pauseBtn').textContent='Ⅱ'});
+$('againBtn').addEventListener('click',()=>{$('endOverlay').style.display='none';reset();running=true;paused=false});
+$('pauseBtn').addEventListener('click',()=>{if(!running)return;paused=!paused;$('pauseBtn').textContent=paused?'▶':'Ⅱ'});
+window.addEventListener('keydown',e=>{const k=e.key===' '||e.code==='Space'?'Space':e.key.length===1?e.key.toLowerCase():e.key;if(['ArrowLeft','ArrowRight','ArrowUp','Space'].includes(k))e.preventDefault();keys.add(k);if(k==='Escape'&&running){paused=!paused;$('pauseBtn').textContent=paused?'▶':'Ⅱ'}});
+window.addEventListener('keyup',e=>{const k=e.key===' '||e.code==='Space'?'Space':e.key.length===1?e.key.toLowerCase():e.key;keys.delete(k)});
+document.querySelectorAll('[data-hold]').forEach(btn=>{const name=btn.dataset.hold;const on=e=>{e.preventDefault();held[name]=true};const off=e=>{e.preventDefault();held[name]=false};btn.addEventListener('pointerdown',on);btn.addEventListener('pointerup',off);btn.addEventListener('pointercancel',off);btn.addEventListener('pointerleave',off)});
+document.querySelectorAll('[data-action]').forEach(btn=>btn.addEventListener('pointerdown',e=>{e.preventDefault();if(btn.dataset.action==='jump'&&player?.ground)player.vy=-520;if(btn.dataset.action==='grenade')throwGrenade()}));
+reset();requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
