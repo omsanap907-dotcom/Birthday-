@@ -28,7 +28,7 @@ test('monkey game includes Vasundhara branding, time-based difficulty and core m
 });
 test('top-down spaceship game has controls, scoring, difficulty and valid JavaScript', async () => {
   const html = await read('../space-shooter.html');
-  for (const marker of ['Vasundhara', 'id="space"', 'id="score"', 'id="lives"', 'id="best"', 'data-key="ArrowLeft"', 'data-key="Space"', 'function spawnRock', 'function finish', 'localStorage.setItem', 'asteroids get faster']) {
+  for (const marker of ['Vasundhara', 'id="space"', 'id="score"', 'id="lives"', 'id="best"', 'data-key="ArrowLeft"', 'data-key="Space"', 'function spawnRock', 'function finish', 'localStorage.setItem', 'Asteroids get faster']) {
     assert.ok(html.includes(marker), `Missing spaceship game feature: ${marker}`);
   }
   const scripts = inlineScripts(html);
