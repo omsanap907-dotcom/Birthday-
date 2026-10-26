@@ -1,0 +1,9 @@
+{
+  "name": "birthday-surprise-monkey-run",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Birthday surprise website and Monkey Run mini-game",
+  "scripts": {
+    "test": "node --test tests/site-smoke.test.mjs"
+  }
+}
