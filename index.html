@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#fff4f7">
-<meta name="description" content="An interactive birthday surprise for Vasundhara with wishes, confetti, balloons and a playable monkey game.">
+<meta name="theme-color" content="#123b2a">
+<meta name="description" content="An interactive birthday surprise for Vasundhara, refreshed on 26 October 2026, with emerald green and gold styling, wishes, confetti and games.">
 <title>Happy Birthday, Vasundhara! 🎂</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
 <style>
-:root{--pink:#ff6b9a;--deep:#702d67;--yellow:#ffd166;--purple:#9277ff;--ink:#472d53;--paper:#fff9fb}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#fff3f7 0%,#fff9e9 48%,#f1efff 100%);min-height:100vh;overflow-x:hidden}
+:root{--pink:#c9a227;--deep:#123b2a;--yellow:#f2cf70;--purple:#477c61;--ink:#183a2d;--paper:#f7f5e9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#edf4e8 0%,#fbf5df 48%,#e1eee2 100%);min-height:100vh;overflow-x:hidden}
 button{font:700 14px 'DM Sans',sans-serif;cursor:pointer;border:0;transition:transform .2s,box-shadow .2s}button:hover{transform:translateY(-3px)}button:focus-visible{outline:3px solid #704bdb;outline-offset:4px}
 .confetti-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:30}
-.blob{position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);opacity:.5;pointer-events:none}.blob.one{width:280px;height:280px;background:#ffc3d5;top:-100px;left:-90px}.blob.two{width:350px;height:350px;background:#d8ccff;right:-160px;top:36%}.blob.three{width:220px;height:220px;background:#ffdf9a;left:10%;bottom:-130px}
+.blob{position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);opacity:.5;pointer-events:none}.blob.one{width:280px;height:280px;background:#c8dfc4;top:-100px;left:-90px}.blob.two{width:350px;height:350px;background:#d7c27a;right:-160px;top:36%}.blob.three{width:220px;height:220px;background:#b5d5ad;left:10%;bottom:-130px}
 header{max-width:1100px;margin:auto;padding:22px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px}.logo{font-weight:800;letter-spacing:-.5px}.logo span{color:var(--pink)}.pill{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#8a668c;background:#ffffffa6;border:1px solid #fff;padding:10px 14px;border-radius:999px}
 main{max-width:1100px;margin:auto;padding:0 22px}.hero{text-align:center;padding:44px 0 55px;position:relative}.eyebrow{display:inline-flex;gap:9px;align-items:center;border-radius:999px;background:#fff;border:1px solid #fff;padding:10px 15px;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:#9d5478;font-weight:800;box-shadow:0 8px 24px #8c4e7b10}.hero h1{font-size:clamp(45px,9vw,92px);line-height:1.07;letter-spacing:-4px;margin:24px 0 16px;font-weight:800;color:#59335f}.hero h1 .script{font-family:'Pacifico',cursive;color:var(--pink);font-weight:400;letter-spacing:-2px;display:block;margin-top:5px}.hero p{font-size:clamp(15px,2.4vw,18px);line-height:1.8;max-width:570px;margin:0 auto;color:#8b6b8c}.hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:27px}.primary{background:linear-gradient(135deg,#ff6b9a,#ff8a9d);color:white;border-radius:999px;padding:15px 24px;box-shadow:0 12px 24px #ff6b9a35}.secondary{background:#fff;color:#765d80;border:1px solid #f4dce9;border-radius:999px;padding:15px 22px;box-shadow:0 8px 18px #704bdb0c}
 .stage{max-width:720px;margin:10px auto 0;position:relative;height:265px;display:flex;align-items:center;justify-content:center}.sunburst{position:absolute;width:225px;height:225px;border:1px dashed #f7a9c5;border-radius:50%;animation:spin 40s linear infinite}.sunburst:before,.sunburst:after{content:'✦';position:absolute;color:#f2ae44;font-size:22px}.sunburst:before{top:18px;left:25px}.sunburst:after{bottom:15px;right:24px}.cake{position:relative;width:170px;height:155px;z-index:2;cursor:pointer;filter:drop-shadow(0 18px 14px #ab62852b);transition:transform .25s}.cake:hover{transform:scale(1.04) rotate(-1deg)}.cake .tier{position:absolute;bottom:12px;left:10px;width:150px;height:62px;border-radius:14px 14px 20px 20px;background:linear-gradient(180deg,#ffbad2 0 22%,#ff7ea8 23% 100%);border:3px solid #fff0f5}.cake .tier:before{content:'';position:absolute;left:0;right:0;top:8px;height:13px;background:radial-gradient(ellipse at 10px 0,#fff6fa 0 8px,transparent 9px) 0 0/25px 16px repeat-x}.cake .top{position:absolute;bottom:70px;left:22px;width:126px;height:38px;border-radius:50%;background:#ffe3a7;border:3px solid #fff5df;z-index:2}.cake .top:after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:15px;background:radial-gradient(ellipse at 10px 0,#ff8caa 0 8px,transparent 9px) 0 0/25px 15px repeat-x}.candle{position:absolute;bottom:104px;left:80px;width:10px;height:37px;border-radius:5px;background:repeating-linear-gradient(135deg,#a58cff 0 5px,#fff 5px 10px);z-index:4}.flame{position:absolute;bottom:139px;left:78px;width:14px;height:20px;background:radial-gradient(ellipse at 50% 65%,#fff4a9 0 22%,#ffae36 48%,#ff6d60 75%);border-radius:70% 30% 60% 40%;transform:rotate(2deg);filter:drop-shadow(0 0 10px #ffb544);animation:flicker .55s ease-in-out infinite alternate;z-index:5}.flame.off{display:none}.sprinkle{position:absolute;width:7px;height:3px;border-radius:5px;background:#fff;z-index:3}.s1{bottom:39px;left:40px;transform:rotate(20deg)}.s2{bottom:51px;left:79px;background:#ffe18c;transform:rotate(-20deg)}.s3{bottom:32px;right:38px;background:#b2e6ff;transform:rotate(30deg)}.s4{bottom:54px;right:52px;background:#fff}.cake-hint{position:absolute;bottom:-2px;font-size:11px;font-weight:700;color:#a780a3;letter-spacing:.5px}
@@ -40,12 +40,38 @@ footer{text-align:center;padding:30px 20px 40px;color:#ae8ea9;font-size:11px}foo
 @keyframes riseBalloon{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-360px) rotate(8deg)}}
 @media(max-width:700px){.balloon-game{padding:17px}.game-arena{height:245px}.game-top{align-items:flex-start}}
 
+
+/* Emerald & gold birthday refresh — 26 October 2026 */
+:root{--pink:#b99220;--deep:#123b2a;--yellow:#f0ce72;--purple:#4f8061;--ink:#183a2d;--paper:#f7f5e9}
+body{background:radial-gradient(ellipse at 12% 8%,#d8e8d0 0,transparent 32%),radial-gradient(ellipse at 88% 38%,#f2e4b5 0,transparent 30%),linear-gradient(135deg,#f4f7ed 0%,#fcf6df 48%,#e4efe2 100%);color:var(--ink)}
+.blob.one{background:#b7d3ad}.blob.two{background:#e7d28b}.blob.three{background:#c2dfb9}
+.logo span,.hero h1 .script,footer b{color:#b38a17}
+.pill,.eyebrow{color:#526e45;border-color:#e3d49a;background:#fffdf3}
+.hero h1{color:#17442f}.hero p,.wish p,.section-title p,.box>p{color:#667f68}
+.primary{background:linear-gradient(135deg,#174d35,#2e704b);color:#fff;box-shadow:0 12px 24px #174d3528}
+.secondary{color:#244c36;border-color:#d9dfc4;background:#fffdf3;box-shadow:0 8px 18px #395d3210}
+.wish,.box,.balloon-game{background:#fffdf0d9;border-color:#fffefa}
+.wish h3,.box h3{color:#214c34}
+.wish-button{background:#c19a27;color:#172f21}
+.reveal{background:#edf4e5;color:#35583b}
+.bubble-buttons button{background:#f8f0ce;border-color:#e8d69a}
+.compliment{color:#8c6b13}
+.final-card{background:linear-gradient(135deg,#c6dfbd,#f0d987 55%,#e8edcf)}
+.final-card h2{color:#17442f}.final-card p{color:#49694c}
+.final-card button{color:#17442f}
+.game-arena{background:linear-gradient(180deg,#e1f0dc,#fff8df 75%,#d4e5c9);border-color:#c5d6a0}
+.game-arena:after{color:#7c9467}
+.stat{background:#f6efcf;color:#52652f}
+.joke-reveal{background:#faf2d8;border-color:#e9d58d;color:#496746}
+.joke-reveal strong,.mini-label{color:#9b7818}
+@media(prefers-color-scheme:dark){/* Keep the birthday page bright and readable regardless of device theme. */}
+
 </style>
 </head>
 <body>
 <div class="blob one"></div><div class="blob two"></div><div class="blob three"></div>
 <canvas class="confetti-canvas" id="confetti" aria-hidden="true"></canvas>
-<header><div class="logo">little celebrations <span>✦</span></div><div class="pill">12 October · Birthday mode 🎉</div></header>
+<header><div class="logo">little celebrations <span>✦</span></div><div class="pill">26 October 2026 · Birthday mode 🎉</div></header>
 <main>
 <section class="hero" id="home">
 <div class="eyebrow">🎈 Today's all about celebrating you 🎈</div>
@@ -99,7 +125,7 @@ footer{text-align:center;padding:30px 20px 40px;color:#ae8ea9;font-size:11px}foo
 <button id="finalBtn">One last burst of confetti ✨</button>
 </section>
 </main>
-<footer>MADE WITH <b>♥</b> AND A LOT OF BIRTHDAY ENERGY · HAVE THE BEST DAY, KRATI!</footer>
+<footer>MADE WITH <b>♥</b> AND A LOT OF BIRTHDAY ENERGY · HAVE THE BEST DAY, VASUNDHARA!</footer>
 <script>
 (() => {
  const canvas=document.getElementById('confetti'),ctx=canvas.getContext('2d');let w=0,h=0,pieces=[],raf=0;
