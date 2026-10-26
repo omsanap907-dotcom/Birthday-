@@ -26,6 +26,15 @@ test('monkey game includes Vasundhara branding, time-based difficulty and core m
   assert.equal(scripts.length, 1, 'Game should have one inline application script');
   for (const script of scripts) assert.doesNotThrow(() => new vm.Script(script), 'Game inline JavaScript should parse');
 });
+test('top-down spaceship game has controls, scoring, difficulty and valid JavaScript', async () => {
+  const html = await read('../space-shooter.html');
+  for (const marker of ['Vasundhara', 'id="space"', 'id="score"', 'id="lives"', 'id="best"', 'data-key="ArrowLeft"', 'data-key="Space"', 'function spawnRock', 'function finish', 'localStorage.setItem', 'asteroids get faster']) {
+    assert.ok(html.includes(marker), `Missing spaceship game feature: ${marker}`);
+  }
+  const scripts = inlineScripts(html);
+  assert.equal(scripts.length, 1, 'Spaceship game should have one inline application script');
+  for (const script of scripts) assert.doesNotThrow(() => new vm.Script(script), 'Spaceship game inline JavaScript should parse');
+});
 test('static deployment files and package scripts are configured', async () => {
   const [workflow, netlify, pkg] = await Promise.all([read('../.github/workflows/pages.yml'), read('../netlify.toml'), read('../package.json').then(JSON.parse)]);
   assert.match(workflow, /run: npm test/);
