@@ -9,7 +9,7 @@ A mobile-friendly birthday surprise with interactive celebrations **plus a separ
 
 ## Run locally
 
-Open `index.html` in a modern browser. Open `monkey-game.html` directly to play the runner. For automated checks, use Node.js 20 or newer:
+Open `index.html` in a modern browser. Open `monkey-game.html` directly to play the runner. For automated checks, use Node.js 24 or newer:
 
 ```sh
 npm test
