@@ -15,7 +15,7 @@
 <section class="panel" aria-label="Vasundhara's Birthday Monkey Run game">
 <div class="stats" aria-live="polite"><div class="stat">🍌 Bananas: <span id="score">0</span></div><div class="stat">❤️ Lives: <span id="lives">3</span></div><div class="stat">🏆 Best: <span id="best">0</span></div></div>
 <div class="stage" id="stage"><canvas id="game" width="800" height="410" aria-label="Game: collect bananas and jump over coconuts"></canvas>
-<div class="overlay" id="overlay"><div class="overlay-card"><div class="emoji">🐒🍌🎉</div><h2 id="overlayTitle">Vasundhara's Birthday Banana Dash!</h2><p id="overlayText">Collect 🍌 bananas for points. Jump over 🥥 coconuts to protect your three lives. The game gets faster as time passes! Use the jump button, tap the game, or press Space / ↑.</p><button class="btn" id="start" type="button">Let's play!</button></div></div></div>
+<div class="overlay" id="overlay"><div class="overlay-card"><div class="emoji">🐒🍌🎉</div><h2 id="overlayTitle">Vasundhara's Birthday Banana Dash!</h2><p id="overlayText">Collect 🍌 bananas for points. Jump over 🥥 coconuts to protect your three lives. Every banana makes you faster, and the game also speeds up over time! Use the jump button, tap the game, or press Space / ↑.</p><button class="btn" id="start" type="button">Let's play!</button></div></div></div>
 <div class="controls"><div class="hint">Keyboard: <b>Space</b> / <b>↑</b> to jump<br>Phone: tap the game or press JUMP</div><div class="control-buttons"><button class="control" id="jump" type="button" aria-label="Jump">⬆️ <span style="font-size:12px">JUMP</span></button><button class="control" id="pause" type="button" aria-label="Pause game" disabled>Ⅱ</button></div></div>
 </section>
 <p class="note">Made especially for Vasundhara with birthday energy 💚 · <a href="./index.html">Back to the birthday surprise</a></p>
@@ -54,9 +54,9 @@ function endGame(){state='over';cancelAnimationFrame(raf);pauseBtn.disabled=true
 function loop(now){
 if(state!=='playing')return;
 const dt=Math.min(Math.max((now-lastTime)/1000,0),.035);lastTime=now;worldTime+=dt;
-// Smooth time-based difficulty: accelerate from 250 to 470 px/s over about 40 seconds.
-speed=Math.min(470,250+worldTime*5.5);spawnIn-=dt;
-if(spawnIn<=0){spawnItem();const difficulty=Math.min(1,worldTime/40);spawnIn=Math.max(.52,1.2-difficulty*.48)+rand(0,.24)}
+// Speed rises with every banana collected, as well as gradually over time; capped at 650 px/s.
+speed=Math.min(650,250+worldTime*3.5+score*18);spawnIn-=dt;
+if(spawnIn<=0){spawnItem();const difficulty=Math.min(1,worldTime/50+score/35);spawnIn=Math.max(.38,1.2-difficulty*.48-score*.012)+rand(0,.18)}
 velocityY+=1750*dt;playerY+=velocityY*dt;if(playerY>groundY-playerH){playerY=groundY-playerH;velocityY=0}
 if(invulnerable>0)invulnerable=Math.max(0,invulnerable-dt);
 const player={x:playerX+4,y:playerY+5,w:playerW-8,h:playerH-8};
